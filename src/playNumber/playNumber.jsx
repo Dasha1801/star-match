@@ -5,7 +5,7 @@ const PlayNumber = (props) => {
     <button
       key={props.number}
       className="number"
-      onClick={() => console.log(props.number)}
+      onClick={() => props.onClick(props.number, props.status)}
       style={{ backgroundColor: colors[props.status] }}
     >
       {props.number}

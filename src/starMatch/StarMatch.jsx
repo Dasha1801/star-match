@@ -7,7 +7,7 @@ import StarsDisplay from "../starsDisplay/starsDisplay";
 const StarMatch = () => {
   const [stars, setStars] = useState(utils.random(1, 9));
   const [availableNums, setAvailableNums] = useState(utils.range(1, 9));
-  const [candidateNums, setCanditateNums] = useState([]);
+  const [candidateNums, setCandidateNums] = useState([]);
   const candidatesAreWrong = utils.sum(candidateNums) > stars;
   const numberStatus = (number) => {
     if (!availableNums.includes(number)) {
@@ -17,6 +17,25 @@ const StarMatch = () => {
       return candidatesAreWrong ? "wrong" : "candidate";
     }
     return "available";
+  };
+  const onNumberClick = (number, currentStatus) => {
+    if (currentStatus === "used") {
+      return;
+    }
+    const newCandidatesNums =
+      currentStatus === "available"
+        ? candidateNums.concat(number)
+        : candidateNums.filter((cn) => cn !== number);
+    if (utils.sum(newCandidatesNums) !== stars) {
+      setCandidateNums(newCandidatesNums);
+    } else {
+      const newAvailableNums = availableNums.filter(
+        (num) => !newCandidatesNums.includes(num)
+      );
+      setStars(utils.randomSumIn(newAvailableNums, 9));
+      setAvailableNums(newAvailableNums);
+      setCandidateNums([]);
+    }
   };
   return (
     <div className="game">
@@ -34,6 +53,7 @@ const StarMatch = () => {
                 key={number}
                 number={number}
                 status={numberStatus(number)}
+                onClick={onNumberClick}
               />
             );
           })}
