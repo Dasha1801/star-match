@@ -1,4 +1,4 @@
-import { utils } from "../utils";
+import { utils } from "../shared/utils";
 import "./starsDisplay.css";
 
 const StarsDisplay = (props) => {

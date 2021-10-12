@@ -1,5 +1,5 @@
 import "./playNumber.css";
-import { colors } from "../utils";
+import { colors } from "../shared/numberColors";
 const PlayNumber = (props) => {
   return (
     <button
