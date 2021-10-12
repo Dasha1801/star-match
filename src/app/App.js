@@ -1,5 +1,5 @@
-import StarMatch from '../starMatch/StarMatch';
-import './App.css';
+import StarMatch from '../starMatch/starMatch';
+
 
 function App() {
   return <StarMatch/>;
